@@ -1,1 +1,10 @@
-<router-outlet />
+<header class="topbar">
+  <a routerLink="/"><span class="logo">Mission Control</span></a>
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+  </nav>
+</header>
+
+<main class="panel">
+  <router-outlet />
+</main>
