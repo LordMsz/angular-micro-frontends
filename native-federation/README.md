@@ -1,0 +1,1 @@
+Planned: the same apps on Native Federation, newer approach, native to Angular, more standard.

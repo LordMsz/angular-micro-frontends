@@ -1,0 +1,1 @@
+Webpack Module Federation track: shell + remote + shared lib. Older stack on purpose.
