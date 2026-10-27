@@ -1,10 +1,12 @@
+export type LaunchStatus = 'GO' | 'HOLD' | 'SCRUBBED';
+
 export interface Launch {
   id: string;
   mission: string;
   vehicle: string;
   pad: string;
   windowOpens: string;
-  status: 'GO' | 'HOLD' | 'SCRUBBED';
+  status: LaunchStatus;
 }
 
 export const MOCK_LAUNCHES: Launch[] = [

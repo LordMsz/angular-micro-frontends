@@ -1,0 +1,5 @@
+@for (status of statuses; track status) {
+  <button type="button" [class.active]="selected() === status" (click)="selected.set(status)">
+    {{ status }} ({{ counts()[status] }})
+  </button>
+}
