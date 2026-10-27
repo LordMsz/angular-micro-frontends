@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>Launch Id</th>
+      <th>Mission</th>
+      <th>Vehicle</th>
+      <th>Pad</th>
+      <th>Window opens</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (launch of launches(); track launch.id) {
+    <tr>
+      <td>{{ launch.id }}</td>
+      <td>{{ launch.mission }}</td>
+      <td>{{ launch.vehicle }}</td>
+      <td>{{ launch.pad }}</td>
+      <td>{{ launch.windowOpens | date:'short' }}</td>
+      <td>{{ launch.status }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
