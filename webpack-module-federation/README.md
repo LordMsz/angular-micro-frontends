@@ -4,6 +4,7 @@ Webpack Module Federation track: shell + remote + shared lib. Older stack on pur
 
 ## New Angular app
 - standard `ng new` basically; `npx @angular/cli@22.2.4 new launch-schedule-mfe --skip-git --style=scss --ssr=false --zoneless --prefix=ls --routing --ai-config=none`
+- same for shell, different --prefix=mc to distringuish in DOM
 
 ## Module federation package to MFE (Webpack)
 `npx ng add @angular-architects/module-federation@^22.0.0 --project launch-schedule-mfe --type remote --port 4201`
@@ -19,3 +20,9 @@ Webpack Module Federation track: shell + remote + shared lib. Older stack on pur
 - the SPA fallback turns missing JS into HTML with status 200 (careful with nginx config and try_files)
 - Running the schematic on Windows writes backslash paths (webpack.config.js, angular.json), which break in JS strings and Linux builds
 - The remote schematic exposes the whole App by default. Expose feature routes instead
+- the mf.manifest.json file key has to match exactly the webpack-defined MFE federated module name / remote's name
+- Three names must match exactly, none are type-checked (fail only at runtime, on navigation):
+    - manifest key <-> remote `name` in webpack.config.js (`launchSchedule`)
+    - `exposedModule` <-> remote `exposes` key (`./LaunchRoutes`)
+    - property used in `.then(m => m.X)` <-> exported symbol/variable (`LAUNCH_ROUTES`)
+    - a wrong export name shows up as NG0919 "Cannot read @NgModule metadata" (router gets `undefined`), which is misleading slightly
