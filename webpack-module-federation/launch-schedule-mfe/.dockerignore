@@ -1,0 +1,6 @@
+# Ignore node modules to reduce Docker build context size and avoid Windows-specific binaries in Linux containers
+node_modules
+dist
+.angular
+.git
+.vscode
