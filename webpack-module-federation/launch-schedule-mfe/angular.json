@@ -32,7 +32,7 @@
             "styles": ["src/styles.scss"],
             "main": "src/main.ts",
             "outputPath": "dist/launch-schedule-mfe",
-            "index": "src\\index.html",
+            "index": "src/index.html",
             "customWebpackConfig": {
               "path": "webpack.config.js"
             },
