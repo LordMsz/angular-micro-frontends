@@ -10,6 +10,9 @@ Webpack Module Federation track: shell + remote + shared lib. Older stack on pur
 
 - using "webpack" here instead of rspack or instead of Native Federation alternative (by design)
 
+## Module federation package to shell (Webpack)
+`npx ng add @angular-architects/module-federation@^22.0.0 --project mission-control-shell --type dynamic-host --port 4200`
+
 # Gotchas
 - .dockerignore and .gitignore have no inline comments
 - Windows node_modules must never reach a Linux image
