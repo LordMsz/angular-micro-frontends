@@ -34,7 +34,7 @@ export class Dashboard {
         this.countdownHost().createComponent(m.NextLaunchCountdown, {
           bindings: [
             inputBinding('launchId', this.nextLaunchId),
-            outputBinding<string>('detailsRequested', () => this.router.navigate(['/launches'])),
+            outputBinding<string>('detailsRequested', () => this.router.navigate(['/launches', this.nextLaunchId()])),
           ],
         });
       } catch (err) {

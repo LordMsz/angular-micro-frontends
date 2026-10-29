@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { NextLaunchCountdown } from './launches/next-launch-countdown/next-launch-countdown';
 
@@ -10,7 +10,9 @@ import { NextLaunchCountdown } from './launches/next-launch-countdown/next-launc
   templateUrl: './app.html',
 })
 export class App {
+  private readonly router = inject(Router);
+
   onDetailsRequested(launchId: string) {
-    alert('Details requested for launch:' + launchId);
+    this.router.navigate(['launches', launchId]);
   }
 }

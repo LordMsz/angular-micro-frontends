@@ -1,0 +1,13 @@
+<!-- @if (launch(); as launch) { -->
+@if (launch$ | async; as launch) {
+  <h2>{{ launch.mission }}</h2>
+  <dl>
+    <dt>Vehicle</dt><dd>{{ launch.vehicle }}</dd>
+    <dt>Pad</dt><dd>{{ launch.pad }}</dd>
+    <dt>Window opens</dt><dd>{{ launch.windowOpens | date:'medium' }}</dd>
+    <dt>Status</dt><dd>{{ launch.status }}</dd>
+  </dl>
+} @else {
+  <p>Launch not found.</p>
+}
+<a routerLink="..">Back to schedule</a>

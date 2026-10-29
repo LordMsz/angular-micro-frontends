@@ -12,7 +12,7 @@
   <tbody>
     @for (launch of launches(); track launch.id) {
     <tr>
-      <td>{{ launch.id }}</td>
+      <td><a [routerLink]="[launch.id]">{{ launch.id }}</a></td>
       <td>{{ launch.mission }}</td>
       <td>{{ launch.vehicle }}</td>
       <td>{{ launch.pad }}</td>
