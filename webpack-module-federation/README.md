@@ -30,3 +30,22 @@ Webpack Module Federation track: shell + remote + shared lib. Older stack on pur
     - e.g. `NextLaunchCountdown` `launchId` input that would break at runtime if renamed only on one side
 - NgComponentOutlet for direct component rendering doesn't support output binding
 - Tests run on the esbuild pipeline, the app on webpack (MF). A test passing doesn't prove the federated build works.
+- Router config is the host's: a remote's `app.config.ts` never runs when federated. Remotes must not depend on host router features
+    - e.g. `withComponentInputBinding()` is app-wide, binds by name from path/query params + route data into any routed component (collisions across teams). Remotes read `ActivatedRoute.paramMap` instead
+- Remote links stay relative (`[id]`, `..`): the remote doesn't know its mount path in the shell
+
+# Lesson: one missing import in the shell breaks a remote
+**Symptom:** the remote works standalone; inside the shell it throws `NG0203: toSignal() can only be used within an injection context`. No config is wrong.
+
+**Cause:**
+- `toSignal` lives in `@angular/core/rxjs-interop`, a secondary entry point. It imports core internals via *relative private chunks* (`./_not_found-chunk.mjs` holds the "current injector" state), not via `'@angular/core'`
+- `shareAll` lists it, but webpack only *provides* shared modules the build actually imports. Shell never used `toSignal` -> not in the share scope
+- the remote falls back to its own copy, with its own copy of core internals. Shell's core sets the injector in its copy, `toSignal` checks the remote's copy → NG0203
+- i.e. "one Angular runtime" broken through a side door: `@angular/core` itself is shared fine
+
+**Fixes:**
+- shell imports it (see the commented-out line in `mission-control-shell/src/app/app.ts`). Works, but the shell's build silently becomes the platform contract: every secondary entry point any remote uses must be imported by the shell
+- remote avoids it (what we do, `launch-detail.ts`: `paramMap` + `async` pipe). Sidesteps, doesn't fix; the next remote using `toSignal` hits it again
+- Native Federation pre-builds all shared secondary entry points into the import map -> this class of bug mostly goes away (to verify in that track)
+
+**Takeaway:** MFE integration fails at runtime, only when federated, with misleading errors. Unit tests won't catch it (different build pipeline, no federation). Every shell + remote combination needs automated integration tests against the real federated build (e2e on deployed/composed apps). Budget for it; the cost of MFE is higher than it looks.

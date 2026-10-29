@@ -42,6 +42,7 @@ Approach overview (as of 2026 — verify versions in the official docs):
 - **Shared singletons move in lockstep** (Angular major, shared libs). Everything else may differ per team.
 - **Federated code runs with full page privileges.** CORS only governs reading responses; the trust boundary is CSP + who can deploy remotes.
 - **Relative URLs inside a remote resolve against the shell.** Remote assets and API calls need a base URL of their own.
+- **Integration breaks only at runtime, only when federated** (untyped names, partially shared packages). Unit tests can't see it — automated tests against the real composed apps are mandatory.
 - **MFE is an organisational tool.** Deployables ≈ teams, not features.
 
 ## Links
