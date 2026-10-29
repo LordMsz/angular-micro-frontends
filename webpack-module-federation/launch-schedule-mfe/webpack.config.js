@@ -12,6 +12,7 @@ module.exports = withModuleFederationPlugin({
     // './Component': './src/app/app.ts', // we don't want to expose the entire app, just a feature or component
     './LaunchRoutes': './src/app/launches/launch.routes.ts', // exposing the launch routes for module federation
     './LaunchStatusRoutes': './src/app/launches/launch-status.routes.ts', // expose route for "mini-component" with same principle
+    './NextLaunchCountdown': './src/app/launches/next-launch-countdown/next-launch-countdown.ts', // direct component exposure for module federation
   },
 
   shared: {

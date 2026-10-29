@@ -1,0 +1,6 @@
+@if (launch(); as launch) {
+  <strong>{{ launch.mission }}</strong> · T-minus {{ secondsLeft() }} s
+  <button type="button" (click)="detailsRequested.emit(launch.id)">Details</button>
+} @else {
+  Unknown launch
+}

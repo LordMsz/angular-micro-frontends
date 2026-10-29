@@ -4,3 +4,6 @@
   <a routerLink="/status">Launch Status</a>
 </nav>
 <router-outlet />
+
+<h2>Next Launch Countdown</h2>
+<ls-next-launch-countdown [launchId]="'6'" (detailsRequested)="onDetailsRequested($event)"></ls-next-launch-countdown>

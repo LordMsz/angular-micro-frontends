@@ -3,3 +3,9 @@
 <section class="card">
   <router-outlet name="launch-status"></router-outlet>
 </section>
+
+<section class="card">
+  <h3>Next launch</h3>
+  <!-- Direct component insertion for the next launch countdown from MFE -->
+  <ng-container #countdownHost />
+</section>
