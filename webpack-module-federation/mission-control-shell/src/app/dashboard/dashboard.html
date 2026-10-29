@@ -7,5 +7,21 @@
 <section class="card">
   <h3>Next launch</h3>
   <!-- Direct component insertion for the next launch countdown from MFE -->
+  @if (countdownLoadingError()) {
+  <p class="error">Failed to load next launch countdown.</p>
+  }
+  @else {
   <ng-container #countdownHost />
+  }
+</section>
+
+<section class="card">
+  <h3>Next launch (NgComponentOutlet, no output support)</h3>
+  <!-- Template alternative using NgComponentOutlet: -->
+  <!-- Note no output support -->
+  @if (countdown.error()) {
+  <p class="error">Failed to load next launch countdown.</p>
+  } @else if (countdown.hasValue()) {
+  <ng-container *ngComponentOutlet="countdown.value(); inputs: { launchId: nextLaunchId() }" />
+  }
 </section>

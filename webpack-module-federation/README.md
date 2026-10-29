@@ -28,3 +28,5 @@ Webpack Module Federation track: shell + remote + shared lib. Older stack on pur
     - a wrong export name shows up as NG0919 "Cannot read @NgModule metadata" (router gets `undefined`), which is misleading slightly
 - another untyped contract is the communication between components
     - e.g. `NextLaunchCountdown` `launchId` input that would break at runtime if renamed only on one side
+- NgComponentOutlet for direct component rendering doesn't support output binding
+- Tests run on the esbuild pipeline, the app on webpack (MF). A test passing doesn't prove the federated build works.
